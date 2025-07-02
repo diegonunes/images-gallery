@@ -29,7 +29,7 @@ const App = () => {
 
   return (
       <div>
-        <Header title="Image Gallery"/>
+        <Header title="Images Gallery"/>
         <Search word={word} setWord={setWord}
                 handleSubmit={handleSearchSubmit}/>
         <Container className="mt-4">
