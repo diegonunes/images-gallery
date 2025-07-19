@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Search from './components/Search.jsx';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import ImageCard from './components/ImageCard.jsx';
 import {Col, Container, Row} from 'react-bootstrap';
 import Welcome from './components/Welcome.jsx';
@@ -12,6 +12,18 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
 const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const getSavedImages = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/images`);
+        setImages(res.data || []);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSavedImages();
+  }, []);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
