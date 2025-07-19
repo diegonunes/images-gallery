@@ -5,6 +5,7 @@ import {useState} from 'react';
 import ImageCard from './components/ImageCard.jsx';
 import {Col, Container, Row} from 'react-bootstrap';
 import Welcome from './components/Welcome.jsx';
+import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:5000';
 
@@ -12,15 +13,16 @@ const App = () => {
   const [word, setWord] = useState('');
   const [images, setImages] = useState([]);
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    fetch(
-        `${API_URL}/new-image?query=${word}`).
-        then((res) => res.json()).then((data) => {
-      setImages([{...data, title: word}, ...images]);
-    }).catch((err) => {
-      console.log(err);
-    });
+
+    try {
+      const res = await axios.get(`${API_URL}/new-image?query=${word}`);
+      setImages([{...res.data, title: word}, ...images]);
+    } catch (error) {
+      console.log(error);
+    }
+
     setWord('');
   };
 
