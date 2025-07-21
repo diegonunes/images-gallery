@@ -53,6 +53,7 @@ def images():
         result = images_collection.insert_one(image)
         inserted_id = result.inserted_id
         return {"inserted_id": inserted_id}
+    return None
 
 
 @app.route("/images/<image_id>", methods=["DELETE"])
