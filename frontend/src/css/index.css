@@ -34,3 +34,14 @@
     margin-bottom: 30px;
     padding: 30px 60px;
 }
+
+.spinner-container {
+    position: relative;
+    height: 90vh;
+}
+
+.spinner-centered {
+    position: absolute;
+    top: calc(50% - 1rem);
+    left: calc(50% - 1rem);
+}
